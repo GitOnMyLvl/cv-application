@@ -1,8 +1,11 @@
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { format } from "date-fns";
  
-function PracticalExperience(){
-    return (
+function PracticalExperience( {addExperience} ){
+    const
+     return (
       <div className="card">
         <h2>Practical Experience</h2>
         <div className="input-container">

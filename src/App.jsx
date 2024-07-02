@@ -5,20 +5,30 @@ import PracticalExperience from "./components/PracticalExperience"
 import Cv from "./components/CV"
 
 function App() {
-  const [generalInformation, setGeneralInformation] = useState({firstName: "", lastName: "", email: "", phone: ""})
-  const [educations, setEducations] = useState([{institution: "", degree: "", startDate: "", endDate: ""}])
-  const [experiences, setExperiences] = useState([{company: "", position: "", responsibility: "", startDate: "", endDate: ""}])
+  const [generalInformation, setGeneralInformation] = useState({firstName: "", lastName: "", email: "", phone: ""});
+  const [educations, setEducations] = useState([]);
+  const [experiences, setExperiences] = useState([]);
 
-  const handleChange = (e, section) => {
+  const handleChange = (e, section, index = null) => {
     const { name, value } = e.target;
     if (section === 'general'){
       setGeneralInformation({...generalInformation, [name]: value})
+    }else if (section === 'education' && index !== null){
+      const newEducations = educations.slice();
+      newEducations[index][name] = value;
+      setEducations(newEducations);
     }
+  };
+
+  const addEducation = (education) => {
+    setEducations([...educations, education])
   }
+
+
   return (
     <>
       <GeneralInfo data={generalInformation} handleChange={handleChange}/>
-      <Education />
+      <Education educations={educations} addEducation={addEducation}/>
       <PracticalExperience />
       <Cv generalInformation={generalInformation} educations={educations} experiences={experiences}/>
     </>
