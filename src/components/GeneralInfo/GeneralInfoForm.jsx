@@ -1,4 +1,10 @@
-function GeneralInfoForm({data, handleChange}){
+function GeneralInfoForm({data, setGeneralInformation}){
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const newData = { ...data, [name]: value };
+    setGeneralInformation(newData);
+  };
   
   return (
     <div className="card">

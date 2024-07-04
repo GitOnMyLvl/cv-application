@@ -8,20 +8,7 @@ import Cv from "./components/CV"
 function App() {
   const [generalInformation, setGeneralInformation] = useState({firstName: "", lastName: "", email: "", phone: ""});
   const [educations, setEducations] = useState([{ institution: "", degree: "", startDate: "", endDate: "", id: uuid() }]);
-  const [experiences, setExperiences] = useState([]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-      setGeneralInformation({...generalInformation, [name]: value})
-  };
-
-  const addEducation = (education) => {
-    setEducations([...educations, education])
-  }
-
-  const addExperience = (experience) => {
-    setExperiences([...experiences, experience])
-  }
+  const [experiences, setExperiences] = useState([ { company: "", position: "", mainTask: "", startDate: "", endDate: "", id: uuid() }]);
 
   const handleEducationDelete = (index) => {
     const newEducations = educations.filter((education, i) => i !== index);
@@ -34,13 +21,14 @@ function App() {
   }
 
 
+
   
 
   return (
     <>
-      <GeneralInfoForm data={generalInformation} handleChange={handleChange}/>
-      <EducationForm educations={educations} addEducation={addEducation}/>
-      <PracticalExperienceForm addExperience={addExperience} />
+      <GeneralInfoForm data={generalInformation} setGeneralInformation={setGeneralInformation}/>
+      <EducationForm educations={educations} setEducations={setEducations}/>
+      <PracticalExperienceForm experiences={experiences} setExperiences={setExperiences} />
       <Cv generalInformation={generalInformation} educations={educations} experiences={experiences} handleEducationDelete={handleEducationDelete} handleExperienceDelete={handleExperienceDelete}/>
     </>
   )

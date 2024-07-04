@@ -10,7 +10,7 @@ function Cv ({ generalInformation, educations, experiences}){
       <h1>CV</h1>
       <GeneralInfo data={generalInformation}/>
       <Education educations={educations}/>
-      <PracticalExperience data={experiences}/>
+      <PracticalExperience experiences={experiences}/>
 
     </div>
   )

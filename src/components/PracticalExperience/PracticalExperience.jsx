@@ -1,13 +1,17 @@
-function PracticalExperience( {data} ) {
+function PracticalExperience( { experiences } ) {
+  const listItems = experiences.map((experience) => (
+    <li key={experience.id}>
+      <p>Company: {experience.company}</p>
+      <p>Position: {experience.position}</p>
+      <p>Main Responsibility: {experience.mainTask}</p>
+      <p>Start Date: {experience.startDate}</p>
+      <p>End Date: {experience.endDate}</p>
+    </li>  ));
   return (
     <div>
-      <h3>Practical Experience</h3>
+      <h3>Experiences</h3>
       <ul>
-        <li>Company: {data.company}</li>
-        <li>Position: {data.position}</li>
-        <li>Main Responsibility: {data.responsibility}</li>
-        <li>Start Date: {data.startDate}</li>
-        <li>End Date: {data.endDate}</li>
+        {listItems}
       </ul>
     </div>
   );

@@ -1,11 +1,11 @@
 function Education( { educations }){
-  const listItems = educations.map((education) => {
+  const listItems = educations.map((education) => (
     <li key={education.id}>
-      <h4>{education.institution}</h4>
-      <p>{education.degree}</p>
-      <p>{education.startDate}</p>
-      <p>{education.endDate}</p>
-    </li>  });
+      <p>Institution: {education.institution}</p>
+      <p>Degree: {education.degree}</p>
+      <p>Start Date: {education.startDate}</p>
+      <p>End Date: {education.endDate}</p>
+    </li>  ));
   return (
     <div>
       <h3>Educations</h3>

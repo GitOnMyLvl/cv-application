@@ -1,64 +1,59 @@
-import { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { format } from "date-fns";
- 
-function PracticalExperienceForm( {addExperience} ){
-    const [experience, setExperience] = useState({company: "", position: "", responsibility: "", startDate: "", endDate: ""});
-    
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setExperience({...experience, [name]: value});
-    };
+function PracticalExperienceForm( {experiences, setExperiences} ){
 
-    const handleAdd = (e) => {
-      e.preventDefault();
-      experience.startDate = format(experience.startDate, "dd/MM/yyyy");
-      experience.endDate = format(experience.endDate, "dd/MM/yyyy");
-      addExperience(experience);
-      setExperience({company: "", position: "", responsibility: "", startDate: "", endDate: ""});
-    };
+  const handleChanges = (index, event) => {
+    const newExperiences = [...experiences];
+    newExperiences[index][event.target.name] = event.target.value;
+    setExperiences(newExperiences);
+  };
 
-     return (
-      <div className="card">
-        <h2>Practical Experience</h2>
-        <form onSubmit={handleAdd}>
-          <label htmlFor="company">
-            Company Name:{' '}
-            <input type="text" id="company" name="company" value={experience.company} onChange={handleChange}/>
-          </label>
-          <label htmlFor="position">
-            Position:{' '}
-            <input type="text" id="position" name="position" value={experience.position} onChange={handleChange} />
-          </label>
-          <label htmlFor="responsibility">
-            Main Responsibility:{' '}
-            <input type="text" id="responsibility" name="responsibility" value={experience.responsibility} onChange={handleChange}/>
-          </label>
-          <label htmlFor="startDate">
-          Start Date:{' '}
-          <DatePicker
-            selected={experience.startDate}
-            dateFormat="dd/MM/yyyy"
-            name="startDate"
-            value={experience.startDate}
-            onChange={(date)=>setExperience({...experience, startDate: date})}
-          />
-        </label>
-        <label htmlFor="endDate">
-          End Date:{' '}
-          <DatePicker
-            selected={experience.endDate}
-            dateFormat="dd/MM/yyyy"
-            name="endDate"
-            value={experience.endDate}
-            onChange={(date)=>setExperience({...experience, endDate: date})}
-          />
-        </label>
-        <button type="submit">Submit</button>   
-        </form>      
-      </div>
-    ); 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newExperiences = [...experiences, { company: "", position: "", mainTask: "", startDate: "", endDate: "" }];
+    setExperiences(newExperiences);
+  };
+     
+  return (
+    <div className="card">
+      <h2>Experience</h2>
+      <form onSubmit={handleSubmit}>
+        {experiences.map((experience, index) => (
+          <div key={index}>
+            <div>
+              <label>
+                Company:{' '}
+                <input type="text" name="company" value={experience.company} onChange={(e) => handleChanges(index, e)}/>
+              </label>
+            </div>
+            <div>
+              <label>
+                Position:{' '}
+                <input type="text" name="position" value={experience.position} onChange={(e) => handleChanges(index, e)}/>
+              </label>
+            </div>
+            <div>
+              <label>
+                Main Task::{' '}
+                <input type="text" name="mainTask" value={experience.mainTask} onChange={(e) => handleChanges(index, e)}/>
+              </label>
+            </div>
+            <div>
+              <label>
+                Start Date:{' '}
+                <input type="date" name="startDate" value={experience.startDate} onChange={(e) => handleChanges(index, e)}/>
+              </label>
+            </div>
+            <div>
+              <label>
+                End Date:{' '}
+                <input type="date" name="endDate" value={experience.endDate} onChange={(e) => handleChanges(index, e)}/>
+              </label>
+            </div>
+            <button type="submit">Submit</button>
+          </div>
+        ))}   
+      </form>
+    </div>
+  );
 }
 
 export default PracticalExperienceForm;
