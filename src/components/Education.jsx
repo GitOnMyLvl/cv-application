@@ -5,23 +5,25 @@ import { format } from "date-fns";
 
 function Education({ addEducation }) {
   const [education, setEducation] = useState({institution: "", degree: "", startDate: "", endDate: ""});
-
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEducation({...education, [name]: value});
   };
 
-  const handleAdd = () => {
+  const handleAdd = (e) => {
+    e.preventDefault();
     education.startDate = format(education.startDate, "dd/MM/yyyy");
     education.endDate = format(education.endDate, "dd/MM/yyyy");
     addEducation(education);
     setEducation({institution: "", degree: "", startDate: "", endDate: ""});
+    console.log(education);
   }
 
   return (
     <div className="card">
       <h2>Education</h2>
-      <div className="input-container">
+      <form onSubmit={handleAdd}>
         <label htmlFor="institution">
           Educational Institution:{' '}
           <input type="text" id="institution" name="institution" value={education.institution} onChange={handleChange}/>
@@ -49,9 +51,10 @@ function Education({ addEducation }) {
             value={education.endDate}
             onChange={(date)=>setEducation({...education, endDate: date})}
           />
-        </label>  
-      </div>
-      <button type="button" onClick={handleAdd}>Add</button>      
+        </label> 
+        <button type="submit">Submit</button>   
+      </form>
+          
     </div>
   );
 } 

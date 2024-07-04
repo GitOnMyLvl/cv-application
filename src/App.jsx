@@ -1,5 +1,5 @@
 import { useState } from "react"
-import GeneralInfo from "./components/GeneralInfo"
+import GeneralInfoForm from "./components/GeneralInfoForm"
 import Education from "./components/Education"
 import PracticalExperience from "./components/PracticalExperience"
 import Cv from "./components/CV"
@@ -9,28 +9,38 @@ function App() {
   const [educations, setEducations] = useState([]);
   const [experiences, setExperiences] = useState([]);
 
-  const handleChange = (e, section, index = null) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    if (section === 'general'){
       setGeneralInformation({...generalInformation, [name]: value})
-    }else if (section === 'education' && index !== null){
-      const newEducations = educations.slice();
-      newEducations[index][name] = value;
-      setEducations(newEducations);
-    }
   };
 
   const addEducation = (education) => {
     setEducations([...educations, education])
   }
 
+  const addExperience = (experience) => {
+    setExperiences([...experiences, experience])
+  }
+
+  const handleEducationDelete = (index) => {
+    const newEducations = educations.filter((education, i) => i !== index);
+    setEducations(newEducations);
+  }
+
+  const handleExperienceDelete = (index) => {
+    const newExperiences = experiences.filter((experience, i) => i !== index);
+    setExperiences(newExperiences);
+  }
+
+
+  
 
   return (
     <>
-      <GeneralInfo data={generalInformation} handleChange={handleChange}/>
-      <Education educations={educations} addEducation={addEducation}/>
-      <PracticalExperience />
-      <Cv generalInformation={generalInformation} educations={educations} experiences={experiences}/>
+      <GeneralInfoForm data={generalInformation} handleChange={handleChange}/>
+      <Education addEducation={addEducation}/>
+      <PracticalExperience addExperience={addExperience} />
+      <Cv generalInformation={generalInformation} educations={educations} experiences={experiences} handleEducationDelete={handleEducationDelete} handleExperienceDelete={handleExperienceDelete}/>
     </>
   )
 }
