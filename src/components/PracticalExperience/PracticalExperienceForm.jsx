@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
  
-function PracticalExperience( {addExperience} ){
+function PracticalExperienceForm( {addExperience} ){
     const [experience, setExperience] = useState({company: "", position: "", responsibility: "", startDate: "", endDate: ""});
     
     const handleChange = (e) => {
@@ -61,4 +61,4 @@ function PracticalExperience( {addExperience} ){
     ); 
 }
 
-export default PracticalExperience;
+export default PracticalExperienceForm;

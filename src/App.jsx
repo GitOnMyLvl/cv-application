@@ -1,12 +1,13 @@
 import { useState } from "react"
-import GeneralInfoForm from "./components/GeneralInfoForm"
-import Education from "./components/Education"
-import PracticalExperience from "./components/PracticalExperience"
+import { v4 as uuid } from "uuid"
+import GeneralInfoForm from "./components/GeneralInfo/GeneralInfoForm"
+import EducationForm from "./components/Education/EducationForm"
+import PracticalExperienceForm from "./components/PracticalExperience/PracticalExperienceForm"
 import Cv from "./components/CV"
 
 function App() {
   const [generalInformation, setGeneralInformation] = useState({firstName: "", lastName: "", email: "", phone: ""});
-  const [educations, setEducations] = useState([]);
+  const [educations, setEducations] = useState([{ institution: "", degree: "", startDate: "", endDate: "", id: uuid() }]);
   const [experiences, setExperiences] = useState([]);
 
   const handleChange = (e) => {
@@ -38,8 +39,8 @@ function App() {
   return (
     <>
       <GeneralInfoForm data={generalInformation} handleChange={handleChange}/>
-      <Education addEducation={addEducation}/>
-      <PracticalExperience addExperience={addExperience} />
+      <EducationForm educations={educations} addEducation={addEducation}/>
+      <PracticalExperienceForm addExperience={addExperience} />
       <Cv generalInformation={generalInformation} educations={educations} experiences={experiences} handleEducationDelete={handleEducationDelete} handleExperienceDelete={handleExperienceDelete}/>
     </>
   )
