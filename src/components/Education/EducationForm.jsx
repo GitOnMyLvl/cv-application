@@ -1,5 +1,7 @@
 import { v4 as uuid } from "uuid";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faSave, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 function EducationForm({ educations, setEducations }) {
 
@@ -75,9 +77,15 @@ function EducationForm({ educations, setEducations }) {
                   </label>
                 </div>
                 <div className="button-container">
-                  <button type="button" onClick={handleCancel}>Cancel</button>
-                  <button type="button" onClick={() => setActiveIndex(null)}>Save</button>
-                  <button type="button "onClick={() => handleDelete(index)}>Delete</button>
+                  <button type="button" onClick={handleCancel} className="cancel-button">
+                    <FontAwesomeIcon icon={faTimes} />
+                  </button>
+                  <button type="button" onClick={() => setActiveIndex(null)} className="save-button">
+                    <FontAwesomeIcon icon={faSave} />
+                  </button>
+                  <button type="button "onClick={() => handleDelete(index)} className="delete-button">
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
                 </div> 
               </>
             ) : (

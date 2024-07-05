@@ -3,6 +3,7 @@
   flex-direction: column;
   margin: 1rem auto;
   width: 30%;
+  
 }
 
 .forms .card{
@@ -13,15 +14,50 @@
   border: 1px solid black;
   border-radius: 25px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: white;
 }
 
-.forms .card .input-form{
+.input-form{
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.forms .card .input-form .form-group label{
+label{
   display: flex;
   flex-direction: column;
+}
+
+.button-container{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.button-container button{
+  flex: 1;
+  transition: 0.3s;
+}
+
+.lock-button:hover{
+  background-color: #646cff;
+  color: white;
+}
+
+.button-container .cancel-button:hover{
+  background-color: gold;
+  border-color: gold;
+  color: white;
+}
+
+.button-container .save-button:hover{
+  background-color: green;
+  border-color: green;
+  color: white;
+}
+
+.button-container .delete-button:hover{
+  background-color: rgb(227, 42, 42);
+  border-color: rgb(227, 42, 42);
+  color: white;
 }

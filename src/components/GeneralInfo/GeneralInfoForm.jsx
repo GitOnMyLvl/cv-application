@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons";
 
 function GeneralInfoForm({data, setGeneralInformation}){
 
@@ -44,7 +46,11 @@ function GeneralInfoForm({data, setGeneralInformation}){
           </label>
         </div>
         <div className="button-container">
-          <button type="submit">{editable ? 'Lock' : 'Unlock'}</button>
+          <button type="submit" className="lock-button">
+            {editable ? 
+            <FontAwesomeIcon icon={faLock} />
+          : <FontAwesomeIcon icon={faUnlock}/>}
+          </button>
         </div>
       </form>
     </div>
