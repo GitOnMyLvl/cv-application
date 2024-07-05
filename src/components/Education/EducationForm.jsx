@@ -1,7 +1,11 @@
 import { v4 as uuid } from "uuid";
+import { useState } from "react";
 
 function EducationForm({ educations, setEducations }) {
-  
+
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [originalEducations, setOriginalEducations] = useState(null);
+
   const handleChanges = (index, event) => {
     const newEducations = [...educations];
     newEducations[index][event.target.name] = event.target.value;
@@ -12,6 +16,30 @@ function EducationForm({ educations, setEducations }) {
     e.preventDefault();
     const newEducations = [...educations, { institution: "", degree: "", startDate: "", endDate: "", id: uuid() }];
     setEducations(newEducations);
+    setActiveIndex(newEducations.length - 1);
+    setOriginalEducations(null);
+  };
+
+  const handleDelete = (index) => {
+    const newEducations = educations.filter((education, i) => i !== index);
+    setEducations(newEducations);
+    setActiveIndex(null);
+    setOriginalEducations(null);
+  };
+
+  const handleActivate = (index) => {
+    setActiveIndex(index);
+    setOriginalEducations({...educations[index]});
+  };
+
+  const handleCancel = () => {
+    if (originalEducations !== null){
+      const newEducations = [...educations];
+      newEducations[activeIndex] = originalEducations;
+      setEducations(newEducations);
+    }
+    setActiveIndex(null);
+    setOriginalEducations(null);
   };
 
   return (
@@ -19,37 +47,49 @@ function EducationForm({ educations, setEducations }) {
       <h2>Educations</h2>
       <form onSubmit={handleSubmit} className="input-form">
         {educations.map((education, index) => (
-          <div key={index}>
-            <div className="form-group">
-              <label>
-                Institution:{" "}
-                <input type="text" name="institution" value={education.institution} onChange={(e) => handleChanges(index, e)}/>
-              </label>
-            </div>
-            <div className="form-group">
-              <label>
-                Degree:{" "}
-                <input type="text" name="degree" value={education.degree} onChange={(e) => handleChanges(index, e)}/>
-              </label>
-            </div>
-            <div className="form-group">
-              <label>
-                Start Date:{" "}
-                <input type="date" name="startDate" value={education.startDate} onChange={(e) => handleChanges(index, e)}/>
-              </label>
-            </div>
-            <div className="form-group">
-              <label>
-                End Date:{" "}
-                <input type="date" name="endDate" value={education.endDate} onChange={(e) => handleChanges(index, e)}/>
-              </label>
-            </div>
-            <button type="submit">Submit</button>
+          <div key={education.id} className="input-form">
+            {activeIndex === index ? (
+              <>
+                <div className="form-group">
+                  <label>
+                    Institution:{" "}
+                    <input type="text" name="institution" value={education.institution} onChange={(e) => handleChanges(index, e)} />
+                  </label>
+                </div>
+                <div className="form-group">
+                  <label>
+                    Degree:{" "}
+                    <input type="text" name="degree" value={education.degree} onChange={(e) => handleChanges(index, e)} />
+                  </label>
+                </div>
+                <div className="form-group">
+                  <label>
+                    Start Date:{" "}
+                    <input type="date" name="startDate" value={education.startDate} onChange={(e) => handleChanges(index, e)} />
+                  </label>
+                </div>
+                <div className="form-group">
+                  <label>
+                    End Date:{" "}
+                    <input type="date" name="endDate" value={education.endDate} onChange={(e) => handleChanges(index, e)} />
+                  </label>
+                </div>
+                <div className="button-container">
+                  <button type="button" onClick={handleCancel}>Cancel</button>
+                  <button type="button" onClick={() => setActiveIndex(null)}>Save</button>
+                  <button type="button "onClick={() => handleDelete(index)}>Delete</button>
+                </div> 
+              </>
+            ) : (
+              <button onClick={() => handleActivate(index)}>{education.institution || 'New Education'}</button>
+            )}
+
           </div>
-        ))}   
+        ))}
+        <button type="submit">New</button>
       </form>
     </div>
   );
-} 
+}
 
 export default EducationForm;

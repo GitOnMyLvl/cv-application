@@ -5,7 +5,7 @@ function GeneralInfo({ data }) {
         <h3>General Information</h3>
         <ul>
           <li>Full Name: {fullName}</li>
-          <li>Email {data.email}</li>
+          <li>Email: {data.email}</li>
           <li>Phone: {data.phone}</li>
         </ul>
       </div>

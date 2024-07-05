@@ -1,6 +1,7 @@
 import Education from "./Education/Education";
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import PracticalExperience from "./PracticalExperience/PracticalExperience";
+import '../styles/cv.css';
 function Cv ({ generalInformation, educations, experiences}){
   
 
@@ -11,7 +12,6 @@ function Cv ({ generalInformation, educations, experiences}){
       <GeneralInfo data={generalInformation}/>
       <Education educations={educations}/>
       <PracticalExperience experiences={experiences}/>
-
     </div>
   )
 }

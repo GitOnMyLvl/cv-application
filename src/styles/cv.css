@@ -1,0 +1,18 @@
+.cv{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  max-width: 800px;
+  width: 70%;
+  margin: 1rem auto;
+  padding: 1rem 3rem;
+}
+
+.cv h1{
+  text-align: center;
+}
+
+.cv li{
+  list-style-type: none;
+  padding: 1rem;
+}

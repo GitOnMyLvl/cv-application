@@ -1,0 +1,27 @@
+.forms{
+  display: flex;
+  flex-direction: column;
+  margin: 1rem auto;
+  width: 30%;
+}
+
+.forms .card{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 1rem;
+  border: 1px solid black;
+  border-radius: 25px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.forms .card .input-form{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.forms .card .input-form .form-group label{
+  display: flex;
+  flex-direction: column;
+}

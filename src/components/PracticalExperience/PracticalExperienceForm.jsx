@@ -3,6 +3,7 @@ import { useState } from "react";
 
 function PracticalExperienceForm({ experiences, setExperiences }) {
   const [activeIndex, setActiveIndex] = useState(null);
+  const [originalExperiences, setOriginalExperiences] = useState(null);
 
   const handleChanges = (index, event) => {
     const newExperiences = [...experiences];
@@ -15,22 +16,39 @@ function PracticalExperienceForm({ experiences, setExperiences }) {
     const newExperiences = [...experiences, { company: "", position: "", mainTask: "", startDate: "", endDate: "", id: uuid() }];
     setExperiences(newExperiences);
     setActiveIndex(newExperiences.length - 1);
+    setOriginalExperiences(null);
   };
 
   const handleDelete = (index) => {
     const newExperiences = experiences.filter((experience, i) => i !== index);
     setExperiences(newExperiences);
     setActiveIndex(null);
+    setOriginalExperiences(null);
+  };
+
+  const handleActivate = (index) => {
+    setActiveIndex(index);
+    setOriginalExperiences({ ...experiences[index] });
+  };
+
+  const handleCancel = () => {
+    if (originalExperiences !== null) {
+      const newExperiences = [...experiences];
+      newExperiences[activeIndex] = originalExperiences;
+      setExperiences(newExperiences);
+    }
+    setActiveIndex(null);
+    setOriginalExperiences(null);
   };
 
   return (
     <div className="card">
-      <h2>Experience</h2>
+      <h2>Practical Experience</h2>
       <form onSubmit={handleSubmit} className="input-form">
         {experiences.map((experience, index) => (
-          <div key={experience.ide}>
+          <div key={experience.id} className="input-form">
             {activeIndex === index ? (
-              <div>
+              <>
                 <div className="form-group">
                   <label>
                     Company:{" "}
@@ -61,11 +79,14 @@ function PracticalExperienceForm({ experiences, setExperiences }) {
                     <input type="date" name="endDate" value={experience.endDate} onChange={(e) => handleChanges(index, e)} />
                   </label>
                 </div>
-                <button type="button" onClick={() => setActiveIndex(null)}>Cancel</button>
-                <button type="delete" onClick={() => handleDelete(index)}>Delete</button>
-              </div>
+                <div className="button-container">
+                  <button type="button" onClick={handleCancel}>Cancel</button>
+                  <button type="button" onClick={() => setActiveIndex(null)}>Save</button>
+                  <button type="button" onClick={() => handleDelete(index)}>Delete</button>
+                </div>
+              </>
             ) : (
-              <button type="button" onClick={() => setActiveIndex(index)}>
+              <button type="button" onClick={() => handleActivate(index)}>
                 {experience.company || "New Experience"}
               </button>
             )}

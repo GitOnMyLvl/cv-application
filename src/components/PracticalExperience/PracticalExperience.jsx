@@ -9,7 +9,7 @@ function PracticalExperience( { experiences } ) {
     </li>  ));
   return (
     <div>
-      <h3>Experiences</h3>
+      <h3>Practical Experiences</h3>
       <ul>
         {listItems}
       </ul>
