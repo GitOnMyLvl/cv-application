@@ -1,10 +1,10 @@
-function Education( { educations }){
+function Education( { educations, formatDate }){
   const listItems = educations.map((education) => (
     <li key={education.id}>
       <p>Institution: {education.institution}</p>
       <p>Degree: {education.degree}</p>
-      <p>Start Date: {education.startDate}</p>
-      <p>End Date: {education.endDate}</p>
+      <p>Start Date: {formatDate(education.startDate)}</p>
+      <p>End Date: {formatDate(education.endDate)}</p>
     </li>  ));
   return (
     <div>

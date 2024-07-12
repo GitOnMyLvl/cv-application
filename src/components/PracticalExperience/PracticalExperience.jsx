@@ -1,11 +1,11 @@
-function PracticalExperience( { experiences } ) {
+function PracticalExperience( { experiences, formatDate } ) {
   const listItems = experiences.map((experience) => (
     <li key={experience.id}>
       <p>Company: {experience.company}</p>
       <p>Position: {experience.position}</p>
       <p>Main Responsibility: {experience.mainTask}</p>
-      <p>Start Date: {experience.startDate}</p>
-      <p>End Date: {experience.endDate}</p>
+      <p>Start Date: {formatDate(experience.startDate)}</p>
+      <p>End Date: {formatDate(experience.endDate)}</p>
     </li>  ));
   return (
     <div>

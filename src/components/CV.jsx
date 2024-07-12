@@ -4,14 +4,16 @@ import PracticalExperience from "./PracticalExperience/PracticalExperience";
 import '../styles/cv.css';
 function Cv ({ generalInformation, educations, experiences}){
   
-
+  const formatDate = (value) => {
+    return value.split("-").reverse().join("-");
+  }
   
   return(
     <div className="cv">
       <h1>CV</h1>
       <GeneralInfo data={generalInformation}/>
-      <Education educations={educations}/>
-      <PracticalExperience experiences={experiences}/>
+      <Education educations={educations} formatDate={formatDate}/>
+      <PracticalExperience experiences={experiences} formatDate={formatDate}/>
     </div>
   )
 }
